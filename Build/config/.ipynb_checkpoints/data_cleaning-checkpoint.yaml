@@ -1,0 +1,242 @@
+pipeline:
+  save_outputs: true
+  output_dir: "data/cleaned"
+  snapshot_timestamp: "2026-01-01 00:00:00+00:00"
+
+open_order:
+  enabled: true
+  # input_path: "C:\\Order Orchestration code\\order_orchestration\\original_files_08092026\\Open Order 080926 - Copy.xlsx"
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/modified_input_files/input_open_order_mapped.xlsx"
+  sheet_name: 0
+  output_file: "cleaned_open_order.xlsx"
+ 
+ageing_inventory:
+  enabled: true
+  # input_path: "C:\\Order Orchestration code\\Original_files\\Ageing inventory may'26.xlsb"
+  input_path:   "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/cleaned data/cleaned_ageing_plant_material_level_py.xlsx"
+  # sheet_name: "Ageing"
+  sheet_name: 0
+  # output_file: "cleaned_ageing_plant_material_level.xlsx"
+  output_file: "cleaned_ageing_plant_material_level.xlsx"
+
+logistics:
+  enabled: true
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/updaed ALL TAT File.xlsx"
+  sheet_name: 0
+  output_file: "cleaned_logistics_wide.xlsx"
+
+allowable_qty:
+  enabled: true
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/Max_qty_VOR.xlsx"
+  sheet_name: 0
+  output_file: "cleaned_allowable_max_qty.xlsx"
+ 
+rlt:
+  enabled: true
+  output_file: "cleaned_rlt_master.xlsx"
+
+  duplicate_analysis_file: "rlt_duplicate_analysis.xlsx"
+  duplicate_summary_file: "rlt_duplicate_summary.xlsx"  
+
+  rdc_rlt:
+    enabled: False
+    input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/RLT_master.xlsx"
+    sheet_name: 0
+
+    column_mapping:
+      plant: "location"
+      location: "location"
+      rdc: "location"
+      rlt: "rlt_days"
+      rlt_days: "rlt_days"
+      lead_time_days: "rlt_days"
+
+  vepdc_supplier_rlt:
+    enabled: true
+    input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/SKU-LocMaster_2026-09-30.csv"
+    sheet_name: 0
+
+    # allowed_location_names:
+    #   - "VEPDC"
+    #   - "VEPDC - KIT FG"
+
+    # vepdc_location_code: "1110"
+
+    column_mapping:
+      sku_code: "material_code"
+      sku_name: "material_description"
+      location_code: "location_code"
+      location_name: "location_name"
+      parent_loc_code: "supplier_code"
+      parent_loc_name: "supplier_name"
+      rlt: "rlt_days"
+
+    # multiple_supplier_rule: "MIN_RLT"
+
+  defaults:
+    vepdc_location: "1110"
+    missing_rdc_rlt: 9999
+    missing_vepdc_supplier_rlt: 9999
+
+inventory_master:
+  enabled: true
+  source: "ageing_inventory"
+  # output_file: "inventory_master.xlsx"
+  output_file: "inventory_master_og.xlsx"
+
+  
+
+
+moq:
+  enabled: true
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/sales MOQ qty.XLSX"
+  sheet_name: 0
+  header: 0
+  output_file: "cleaned_moq_master.xlsx"
+
+  column_mapping:
+    Material: "material_code"
+    Material Code: "material_code"
+    SKU Code: "material_code"
+    material_code: "material_code"
+
+    M.O.Q: "moq_qty"
+    MOQ Qty: "moq_qty"
+    MOQ Quantity: "moq_qty"
+    Min Order Qty: "moq_qty"
+    moq_qty: "moq_qty"
+
+  duplicate_rule: "MAX_MOQ"
+
+norms:
+  enabled: true
+
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/BPR_2026-11-13 DL.xlsb"
+
+  output_file: "cleaned_norms_master.xlsx"
+
+  column_mapping:
+    WHCode: "location"
+    # Plnt: "location"
+    # Plant Code: "location"
+    # Location: "location"
+    # Location Code: "location"
+
+    SKUCode: "material_code"
+    # Material Code: "material_code"
+    # Material Number: "material_code"
+    # SKU Code: "material_code"
+
+    Norm: "norms"
+    # Norms: "norms"
+    # Norm Qty: "norms"
+    # Norms Qty: "norms"
+    # Norm Quantity: "norms"
+
+  duplicate_rule: "LAST"
+
+  validation:
+    remove_missing_location: true
+    remove_missing_material: true
+    remove_missing_norms: true
+    remove_negative_norms: true
+
+git_type_1:
+  enabled: true
+
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/ECC_TRASITSTK_20261113.CSV"
+  sheet_name: 0
+  header: 0
+
+  output_file: "cleaned_git_type_1.xlsx"
+  missing_rlt_output_file: "missing_git_rlt_combinations.xlsx"
+
+  column_mapping:
+    Material: "material_code"
+    To Plant: "destination_location"
+    From Plant/Vendor: "source_location"
+    Quantity: "git_quantity"
+    Delv.Status: "delivery_status"
+    ASN No.: "asn_number"
+    Delv.Date: "dispatch_datetime"
+    Unit: "unit"
+
+  rlt_column_mapping:
+    location: "location"
+    material_code: "material_code"
+    supplier_code: "supplier_code"
+    rlt_days: "inbound_rlt_days"
+
+
+git_type_2:
+  enabled: false
+  input_path: "C:\\Order Orchestration code\\order_orchestration\\original_files_08092026\\Open ASN 080926.xlsx"
+  sheet_name: "ALL"
+  header: 0
+  output_file: "cleaned_git_type_2.xlsx"
+
+  lookback_days: 90
+
+  # Options:
+  # null: use today's date
+  # MAX_IBD_DATE: use latest IBD date in the workbook
+  # YYYY-MM-DD: use a fixed reference date
+  reference_date: "MAX_IBD_DATE"
+
+  column_mapping:
+    Plant: "destination_location"
+    IBD Date: "dispatch_datetime"
+    IBD No.: "asn_number"
+    Material: "material_code"
+    Vendor: "source_location"
+    Qty: "git_quantity"
+    Delivery Status: "delivery_status"
+
+zfmo_dealer_material:
+  enabled: true
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/ZFMO Dump.XLSX"
+  sheet_name: 0
+  header: 0
+
+  output_file: "cleaned_zfmo_dealer_material.xlsx"
+
+  invalid_rows_output_file: "invalid_zfmo_mapping_rows.xlsx"
+
+  duplicate_rows_output_file: "duplicate_zfmo_mapping_rows.xlsx"
+
+  column_mapping:
+    Material: "material_code"
+    Scode: "dealer_code"
+
+dealer_norms:
+  enabled: true
+
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/BPR_2026-11-13 DL.xlsb"
+  sheet_name: 0
+  header: 0
+
+  column_mapping:
+    WHCode: "dealer_code"
+    SKUCode: "material_code"
+    Norm: "dealer_norms"
+
+  # Open-order columns used for enrichment.
+  open_order_dealer_column: "customer_code"
+  open_order_material_column: "material_code"
+
+dealer_parent_mapping:
+  enabled: true
+
+  input_path: "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/customer_mapping.xlsx"
+  sheet_name: 0
+  header: 0
+
+  column_mapping:
+    WHCode: "dealer_code"
+    SourceLocation: "parent_plant"
+
+  open_order_dealer_column: "customer_code"
+
+  # Recommended: stop cleaning if any dealer mapping is missing.
+  fail_on_missing_mapping: false
+ 

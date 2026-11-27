@@ -1,0 +1,6 @@
+source_priority:
+  PARENT_RDC: 1
+  PARENT_GIT: 2
+  CLUSTER_RDC: 3
+  PAN_INDIA_RDC: 4
+  VEPDC: 5

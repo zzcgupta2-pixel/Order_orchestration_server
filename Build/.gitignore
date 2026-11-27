@@ -1,0 +1,5 @@
+\.venv
+\.pytest_cache 
+/data/
+/original_files_08092026/
+/Regular_original_files/

@@ -1,0 +1,17 @@
+allowed_transport_modes:
+  VOR:
+    - AIR
+    - COURIER_EXPRESS
+    - SURFACE
+  REPLENISHMENT:
+    - MILK_RUN
+    - SURFACE
+    - PART_TRUCK_LOAD
+  PUSH:
+    - SURFACE
+    - PART_TRUCK_LOAD
+    - FULL_TRUCK_LOAD
+
+default_buffers:
+  pickup_buffer_hours: 4
+  drop_buffer_hours: 4

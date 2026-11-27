@@ -1,0 +1,271 @@
+execution_defaults:
+  missing_sla_days: 5
+  missing_rlt_days: 5
+  missing_route_transport_mode: "SURFACE"
+
+  # Use a high cost so a missing route does not unfairly
+  # become the cheapest candidate during scoring.
+  missing_route_transport_cost: 999999999
+
+
+replenishment_moq_scoring:
+  weights:
+    sla: 0.30
+    ageing: 0.25
+    rlt: 0.20
+    eligible_quantity: 0.15
+    cost: 0.10
+  # weights:
+  #   sla: 0.50
+  #   ageing: 0.15
+  #   rlt: 0.10
+  #   eligible_quantity: 0.20
+  #   cost: 0.05
+
+  missing_values:
+    sla: 5
+    rlt: 5
+    cost: 999999999
+
+zfmo_replenishment_moq_scoring:
+  # weights:
+  #   sla: 0.50
+  #   ageing: 0.05
+  #   rlt: 0.15
+  #   eligible_quantity: 0.20
+  #   cost: 0.10
+  # weights:
+  #   sla: 0.50
+  #   ageing: 0.15
+  #   rlt: 0.10
+  #   eligible_quantity: 0.20
+  #   cost: 0.05
+  weights:
+    sla: 0.80
+    ageing: 0.05
+    rlt: 0.05
+    eligible_quantity: 0.10
+    cost: 0.0
+
+  missing_values:
+    sla: 5
+    rlt: 5
+    cost: 999999999
+    
+# Used only for ZMSO colour code 16.
+zmso_colour_16_moq_scoring:
+  # weights:
+  #   sla: 0.70
+  #   ageing: 0.15
+  #   rlt: 0.10
+  #   eligible_quantity: 0.05
+  #   cost: 0.00
+  weights:
+    sla: 0.80
+    ageing: 0.10
+    rlt: 0.05
+    eligible_quantity: 0.05
+    cost: 0.00
+
+  missing_values:
+    sla: 5
+    rlt: 5
+    cost: 999999999
+
+    
+push_moq_scoring:
+  weights:
+    sla: 0.25
+    ageing: 0.35
+    rlt: 0.15
+    eligible_quantity: 0.15
+    cost: 0.10
+
+  missing_values:
+    sla: 5
+    rlt: 5
+    cost: 999999999
+
+
+
+    
+rule_version: "1.0"
+configuration_version: "1.0"
+
+order_priority:
+  VOR: 1
+  REPLENISHMENT: 2
+  PUSH: 3
+
+general:
+  single_source_only: true
+  rerouting_after_allocation: false
+  safety_stock_protected: true
+  allow_negative_inventory: false
+  allow_partial_from_single_source: true
+  ageing_threshold_days: 365
+
+vor:
+  git_wait_threshold_hours: 24
+  source_sequence:
+    - PARENT_RDC
+    - PARENT_GIT
+    - CLUSTER_RDC
+    - PAN_INDIA_RDC
+    - VEPDC
+
+replenishment:
+  source_sequence:
+    - PARENT_RDC
+    - PARENT_GIT
+    - CLUSTER_RDC
+    - PAN_INDIA_RDC
+    - VEPDC
+  tie_break_order:
+    - full_fill
+    - maximum_quantity
+    - sla_satisfied
+    - shortest_sla
+    - source_priority
+    - ageing_quantity
+    - lowest_cost
+
+push:
+  source_sequence:
+    - PARENT_RDC
+    - PARENT_GIT
+    - CLUSTER_RDC
+    - PAN_INDIA_RDC
+    - VEPDC
+  tie_break_order:
+    - full_fill
+    - maximum_quantity
+    - ageing_preference
+    - sla_satisfied
+    - shortest_sla
+    - lowest_cost
+    - source_priority
+
+inventory_eligibility:
+  stock_column: actual_stock
+  allocated_column: allocated_quantity
+  pending_so_column: pending_so_quantity
+  safety_stock_column: safety_stock
+
+safety_stock_protection:
+  VOR: true
+  REPLENISHMENT: true
+  PUSH: true
+
+
+
+
+replenishment_selection:
+  strategy: "WEIGHTED_SCORING"
+  # Allowed values:
+  # - SEQUENTIAL_RULES
+  # - WEIGHTED_SCORING
+
+  mandatory_rules:
+    parent_full_fill_first: true
+    single_source_only: true
+    no_split: true
+    credit_block_check: true
+    non_auto_customer_vepdc_only: true
+
+  sequential_rules:
+    alternative_full_fill_tie_break_order:
+      - ageing_quantity
+      - shortest_sla
+      - shortest_rlt
+      - lowest_cost
+      - source_priority
+
+    alternative_partial_tie_break_order:
+      - maximum_quantity
+      - ageing_quantity
+      - shortest_sla
+      - shortest_rlt
+      - lowest_cost
+      - source_priority
+
+  weighted_scoring:
+    enabled: true
+
+    quantity_rule:
+      full_fill_first: true
+      if_no_full_fill_select_max_quantity_first: true
+      quantity_is_not_weighted_when_full_fill_available: true
+
+    weights:
+      ageing: 0.35
+      sla: 0.30
+      rlt: 0.20
+      cost: 0.10
+      source_priority: 0.05
+
+    scoring_direction:
+      ageing: higher_is_better
+      sla: lower_is_better
+      rlt: lower_is_better
+      cost: lower_is_better
+      source_priority: lower_is_better
+
+    rlt_defaults:
+      VEPDC: 10
+      missing_rlt: 9999
+
+    source_priority:
+      PARENT_RDC: 1
+      CLUSTER_RDC: 2
+      PAN_INDIA_RDC: 2
+      VEPDC: 3
+      PARENT_GIT: 4
+
+    score_round_digits: 6
+
+
+
+push_selection:
+  strategy: "WEIGHTED_SCORING"
+
+  mandatory_rules:
+    single_source_only: true
+    no_split: true
+    credit_block_check: true
+    non_auto_customer_vepdc_only: true
+
+  weighted_scoring:
+    enabled: true
+
+    quantity_rule:
+      full_fill_first: true
+      if_no_full_fill_select_max_quantity_first: true
+      quantity_is_not_weighted_when_full_fill_available: true
+
+    weights:
+      ageing: 0.45
+      sla: 0.20
+      rlt: 0.15
+      cost: 0.10
+      source_priority: 0.10
+
+    scoring_direction:
+      ageing: higher_is_better
+      sla: lower_is_better
+      rlt: lower_is_better
+      cost: lower_is_better
+      source_priority: lower_is_better
+
+    rlt_defaults:
+      VEPDC: 0
+      missing_rlt: 9999
+
+    source_priority:
+      PARENT_RDC: 1
+      CLUSTER_RDC: 2
+      PAN_INDIA_RDC: 2
+      VEPDC: 3
+      PARENT_GIT: 4
+
+    score_round_digits: 6

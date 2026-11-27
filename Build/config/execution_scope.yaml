@@ -1,0 +1,15 @@
+execution_scope:
+  VOR: True
+  ACC: True
+  REPLENISHMENT: True
+  PUSH: True
+
+execution_priority:
+  VOR: 1
+  ACC: 2
+  REPLENISHMENT: 3
+  PUSH: 4
+
+output:
+  output_dir: "data/outputs"
+  output_prefix: "unified_execution"

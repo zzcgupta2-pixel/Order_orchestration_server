@@ -1,0 +1,25 @@
+{
+    "VF_rationed" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/YVF_RATION_QTY.csv",
+    "VF_stock" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/ECC_STOCK_20261113.CSV",
+    "git_type_1" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/ECC_TRASITSTK_20261113.CSV",
+    "VF_openso" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/ECC_OPENSO_20261113.CSV",
+    "dealer_norms" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/BPR_2026-11-13 DL.xlsb",
+    "norms" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/BPR_2026-11-13 wh.xlsb",
+    "ageing" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/Ageing",
+    "logistics" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/updaed ALL TAT File.xlsx",
+    "allowable_qty" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/Max_qty_VOR.xlsx",
+    "rlt_S" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/SKU-LocMaster_2026-09-30.csv",
+    "rlt" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/RLT_master.xlsx",
+    "moq" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/sales MOQ qty.XLSX",
+    "zfmo_dealer_material" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/ZFMO Dump.XLSX",
+    "dealer_parent_mapping" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/customer_mapping.xlsx",
+    "credit_block" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/credit block 13112026.xlsx",
+    "mad" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/customer_plant_material_mad_final_02_11_2026.xlsx",
+
+    "ageing_dir_path":"/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/Ageing",
+    "modified_input_files" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/modified_input_files",
+    "cleaned_files" : "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/cleaned_files",
+
+    "open_order": "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Input/modified_input_files/input_open_order_mapped.xlsx",
+    "ageing_inventory": "/home/VECVNET/zzasom/jupyter/01_Developement_work_QA/Chakshu_G/order_orchestration/order_orchestration_mannual/Build/data/cleaned/cleaned_ageing_plant_material_level.xlsx"
+}

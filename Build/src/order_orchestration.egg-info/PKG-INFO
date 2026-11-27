@@ -1,0 +1,8 @@
+Metadata-Version: 2.4
+Name: order-orchestration
+Version: 0.1.0
+Summary: Deterministic rule-based order orchestration engine for aftermarket dealer orders
+Requires-Python: >=3.11
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: pyyaml>=6.0.0
+Requires-Dist: pytest>=8.0.0

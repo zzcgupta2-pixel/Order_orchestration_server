@@ -1,0 +1,244 @@
+calendar_version: "1.0"
+
+timezone: "Asia/Kolkata"
+
+execution_mode:
+  # HISTORICAL_REPLAY = dispatch calculation starts from order creation timestamp
+  # CURRENT_PENDING = dispatch calculation starts from current run timestamp
+  mode: "CURRENT_PENDING"
+
+default_calendar:
+  working_days:
+    - MON
+    - TUE
+    - WED
+    - THU
+    - FRI
+    - SAT
+
+  working_hours:
+    start: "09:00"
+    end: "18:00"
+
+  non_working_days:
+    - SUN
+
+  allowed_order_types:
+    - VOR
+    - ACC
+    - REPLENISHMENT
+    - PUSH
+
+locations:
+  "1110":
+    location_name: "VEPDC"
+
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+
+    sunday_rules:
+      enabled: true
+
+      regular_sunday:
+        is_working: true
+        working_hours:
+          start: "09:00"
+          end: "14:00"
+        allowed_order_types:
+          - VOR
+          - ACC
+
+      last_sunday:
+        is_working: true
+        working_hours:
+          start: "09:00"
+          end: "18:00"
+        allowed_order_types:
+          - VOR
+          - ACC
+          - REPLENISHMENT
+          - PUSH
+
+  "1141":
+    location_name: "Bangalore RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1152":
+    location_name: "Hyderabad RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1153":
+    location_name: "Jhajjer RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1155":
+    location_name: "Kolkata RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1156":
+    location_name: "Ludhiana RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1157":
+    location_name: "Coimbatore RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1158":
+    location_name: "Lucknow RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1159":
+    location_name: "Raipur RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+  "1161":
+    location_name: "Guwahati RDC"
+    working_days:
+      - MON
+      - TUE
+      - WED
+      - THU
+      - FRI
+      - SAT
+    working_hours:
+      start: "09:00"
+      end: "18:00"
+    sunday_rules:
+      enabled: false
+
+date_overrides:
+  - date: "2026-08-15"
+    description: "National holiday example"
+    locations:
+      "1110":
+        is_working: true
+        working_hours:
+          start: "09:00"
+          end: "13:00"
+        allowed_order_types:
+          - VOR
+          - ACC
+
+      "1158":
+        is_working: false
+        working_hours: null
+        allowed_order_types: []
+
+      "1159":
+        is_working: false
+        working_hours: null
+        allowed_order_types: []
+
+  - date: "2026-10-02"
+    description: "Holiday example"
+    locations:
+      "1110":
+        is_working: true
+        working_hours:
+          start: "09:00"
+          end: "14:00"
+        allowed_order_types:
+          - VOR
+          - ACC
+
+      "1141":
+        is_working: false
+        working_hours: null
+        allowed_order_types: []
